@@ -1,0 +1,25 @@
+<button onclick="handleUserInteraction()">Enable Music</button>
+<script>//taken direclty from somewhere and then edited cuz it didnt work but idk where its from (PROBABLY BECAUSE YOU BLOCKED REDDIT!!)
+
+// In your JavaScript file
+function handleUserInteraction() {
+  const audio = document.getElementById('my-audio');
+  audio.play().then(() => {
+    localStorage.setItem('autoplay-preference', 'true');
+  }).catch(error => {
+    console.error('Autoplay failed:', error);
+  });
+}
+
+// On page load, check for the user's preference
+document.addEventListener('DOMContentLoaded', () => {
+  const autoplayAllowed = localStorage.getItem('autoplay-preference');
+  if (autoplayAllowed === 'true') {
+    // This will attempt to autoplay, but may still be blocked by the browser.
+    // It's still better to get a user interaction on each page.
+    // For a seamless experience, an SPA is the only reliable solution.
+    const audio = document.getElementById('my-audio');
+    audio.muted = true; // Autoplaying muted audio is often allowed
+    audio.play();
+  }
+});</script>
